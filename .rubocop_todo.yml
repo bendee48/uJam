@@ -35,6 +35,7 @@ Style/Documentation:
     - 'app/helpers/application_helper.rb'
     - 'app/helpers/static_helper.rb'
     - 'config/application.rb'
+    - 'db/migrate/*'
 
 # Offense count: 1
 # Cop supports --auto-correct.
