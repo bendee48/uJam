@@ -65,6 +65,8 @@ group :development, :test do
   # Linting Tools
   gem 'rubocop', '~> 1.25', '>= 1.25.1'
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
+  # Testing
+  gem 'factory_bot_rails', '~> 6.2'
 end
 
 group :development do

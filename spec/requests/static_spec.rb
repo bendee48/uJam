@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 RSpec.describe 'Static', type: :request do
-  let(:user) { User.create!(email: 'ruth@email.com', password: 'password') }
+  let(:user) { create(:user) }
 
   describe 'GET /' do
-    it 'works! (now write some real specs' do
+    it 'successfully loads homepage' do
       sign_in user
       get root_path
       expect(response).to render_template(:homepage)
