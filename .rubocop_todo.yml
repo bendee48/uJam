@@ -31,11 +31,12 @@ Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'app/controllers/static_controller.rb'
+    - 'app/controllers/*'
     - 'app/helpers/application_helper.rb'
     - 'app/helpers/static_helper.rb'
     - 'config/application.rb'
     - 'db/migrate/*'
+    - 'app/lib/*'
 
 # Offense count: 1
 # Cop supports --auto-correct.
