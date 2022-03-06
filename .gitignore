@@ -30,4 +30,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-todo.txt
+# Dev Notes
+/todo.txt
+
+# Byebug History
+/.byebug_history
