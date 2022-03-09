@@ -68,10 +68,10 @@ group :development, :test do
   gem 'rubocop', '~> 1.25', '>= 1.25.1'
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   # Testing tools
+  gem 'byebug'
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'webmock', '~> 3.14'
-  gem 'byebug'
 end
 
 group :development do

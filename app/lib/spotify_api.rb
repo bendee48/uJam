@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 module SpotifyApi
-  AUTHORIZE_URL = 'https://accounts.spotify.com/authorize'.freeze
-  TOKEN_URL     = 'https://accounts.spotify.com/api/token'.freeze
+  AUTHORIZE_URL = 'https://accounts.spotify.com/authorize'
+  TOKEN_URL     = 'https://accounts.spotify.com/api/token'
   REDIRECT_URL  = if Rails.env.development?
-                    'http://localhost:3000/callback'.freeze
+                    'http://localhost:3000/callback'
                   elsif Rails.env.production?
-                    'https://ujam.herokuapp.com/callback'.freeze
+                    'https://ujam.herokuapp.com/callback'
                   end
   CLIENT_ID     = Rails.application.credentials.spotify.client_id.freeze
   CLIENT_SECRET = Rails.application.credentials.spotify.client_secret.freeze

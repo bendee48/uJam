@@ -20,6 +20,10 @@ Metrics/CyclomaticComplexity:
 Metrics/MethodLength:
   Max: 12
 
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
 Metrics/PerceivedComplexity:
