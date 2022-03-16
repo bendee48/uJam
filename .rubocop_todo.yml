@@ -10,6 +10,10 @@
 AllCops:
   SuggestExtensions: false
 
+Lint/AmbiguousBlockAssociation: 
+  Exclude: 
+    - 'spec/models/user_spec.rb'
+
 # Offense count: 1
 # Configuration parameters: IgnoredMethods.
 Metrics/CyclomaticComplexity:
@@ -36,8 +40,7 @@ Style/Documentation:
     - 'spec/**/*'
     - 'test/**/*'
     - 'app/controllers/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/helpers/static_helper.rb'
+    - 'app/helpers/*'
     - 'config/application.rb'
     - 'db/migrate/*'
     - 'app/lib/*'
