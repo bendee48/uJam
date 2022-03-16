@@ -38,4 +38,28 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'save_tokens' do
+    let(:user) { create(:user) }
+
+    it 'saves a new access token for the user' do
+      user.save_tokens({ access_token: 'new token' })
+      expect(user.access_token).to eql 'new token'
+    end
+
+    it 'saves a new refresh token' do
+      user.save_tokens(refresh_token: 'new refresh')
+      expect(user.refresh_token).to eql 'new refresh'
+    end
+
+    it 'saves a new access and refresh token at the same time' do
+      user.save_tokens(refresh_token: 'new refresh', access_token: 'new access')
+      expect(user.refresh_token).to eql 'new refresh'
+      expect(user.access_token).to eql 'new access'
+    end
+
+    it 'updates access expiration time if new access token is saved' do
+      expect { user.save_tokens(290, access_token: 'new token') }.to change { user.access_token_expiration }
+    end
+  end
 end
