@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       refresh_response = SpotifyApi.request_refreshed_token(current_user)
       access_token = JSON.parse(refresh_response.body)['access_token']
       expires = JSON.parse(refresh_response.body)['expires_in']
-      current_user.save_tokens(expires, access_token: access_token)
+      current_user.save_tokens({ access_token: access_token }, expires)
     end
 
     url = SpotifyApi::RECENTLY_PLAYED_URL

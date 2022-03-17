@@ -12,12 +12,15 @@ class User < ApplicationRecord
     access_token_expiration > DateTime.now if access_token.present?
   end
 
-  def save_tokens(expires = nil, attributes)
-    if expires
-      expires = 90 if Rails.env.development? || Rails.env.test? # testing
-      date = DateTime.now + expires.seconds
-      attributes['access_token_expiration'] = date
-    end
+  def save_tokens(attributes, expires = nil)
+    attributes['access_token_expiration'] = expiry_date(expires) if expires
     update!(attributes)
+  end
+
+  private
+
+  def expiry_date(time)
+    time = 90 if Rails.env.development? || Rails.env.test? # testing
+    DateTime.now + time.seconds
   end
 end

@@ -59,7 +59,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'updates access expiration time if new access token is saved' do
-      expect { user.save_tokens(290, access_token: 'new token') }.to change { user.access_token_expiration }
+      expect { user.save_tokens({ access_token: 'new token' }, 290) }.to change { user.access_token_expiration }
     end
   end
 end
