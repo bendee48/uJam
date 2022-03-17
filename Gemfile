@@ -71,6 +71,7 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'webmock', '~> 3.14'
+  gem 'capybara', '~> 3.36'
 end
 
 group :development do
