@@ -17,6 +17,10 @@ class User < ApplicationRecord
     update!(attributes)
   end
 
+  def authenticated?
+    !!access_token
+  end
+
   private
 
   def expiry_date(time)

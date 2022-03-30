@@ -12,6 +12,14 @@ RSpec.feature 'Authentication', type: :feature do
         expect(page).to have_current_path(root_path)
         expect(user.access_token).to eql nil
       end
+
+      it 'shows authoriztion button on homepage' do
+        sign_in user
+        visit root_path
+
+        expect(page).to have_current_path(root_path)
+        expect(page).to have_selector('#authorize-btn')
+      end
     end
   end
 end

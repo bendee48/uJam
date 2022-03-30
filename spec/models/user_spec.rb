@@ -39,7 +39,7 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe 'save_tokens' do
+  describe '#save_tokens' do
     let(:user) { create(:user) }
 
     it 'saves a new access token for the user' do
@@ -60,6 +60,22 @@ RSpec.describe User, type: :model do
 
     it 'updates access expiration time if new access token is saved' do
       expect { user.save_tokens({ access_token: 'new token' }, 290) }.to change { user.access_token_expiration }
+    end
+  end
+
+  describe '#authenticated?' do
+    context 'user is aunthenticated' do
+      it 'returns true' do
+        expect(user.authenticated?).to be true
+      end
+    end
+
+    context 'user is not authenticated' do
+      let(:user) { build_stubbed(:user, :unauthorised) }
+
+      it 'returns false' do
+        expect(user.authenticated?).to be false
+      end
     end
   end
 end

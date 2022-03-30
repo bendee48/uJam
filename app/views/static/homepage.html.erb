@@ -1,3 +1,4 @@
 <h1>Static#homepage</h1>
 <p>Find me in app/views/static/homepage.html.erb</p>
-<small>Access valid?: <%= current_user.access_token_valid? %></small  >
+<small>Access valid?: <%= current_user.access_token_valid? %></small>
+<button><%= link_to 'Authorize Spotify', authorize_path, class: 'authorize-btn' %></button>
