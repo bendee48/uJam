@@ -71,7 +71,12 @@ group :development, :test do
   gem 'database_cleaner-active_record'
   gem 'factory_bot_rails', '~> 6.2'
   gem 'webmock', '~> 3.14'
-  gem 'capybara', '~> 3.36'
+  # gem 'capybara', '~> 3.36'
+  # gem 'capybara-mechanize'
+  gem 'capybara', '~> 2.7'
+  gem 'capybara-mechanize', '~> 1.11' # For external requests
+  gem 'selenium-webdriver'
+  gem 'byebug'
 end
 
 group :development do
