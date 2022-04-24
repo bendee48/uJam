@@ -13,7 +13,6 @@ class SpotifyController < ApplicationController
   def callback
     # take authorization code from intial authorization request from #authorize
     auth_code = params[:code]
-    params[:state] = 'xyxyx' if Rails.env.test? # For tests - Matches auth_spec:39 *terrible code!* :-(
     returned_state = params[:state]
 
     if returned_state == session[:state_code]
@@ -23,7 +22,7 @@ class SpotifyController < ApplicationController
       expires = JSON.parse(response.body)['expires_in']
 
       current_user.save_tokens({ access_token: access_token, refresh_token: refresh_token }, expires)
-
+      
       flash.notice = 'Successfully authorised.'
     else
       flash.alert = 'Suspicious activity detected. Authorisation terminated.'

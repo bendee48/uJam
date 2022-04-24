@@ -35,3 +35,6 @@
 
 # Byebug History
 /.byebug_history
+
+# Mechanize log
+/mech.log

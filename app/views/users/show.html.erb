@@ -1,5 +1,7 @@
 <h1>Users#show</h1>
 <p>Find me in app/views/users/show.html.erb</p>
-
+<% unless current_user.authenticated? %>
+  <button><%= link_to 'Authorize Spotify', authorize_path, class: 'authorize-btn' %></button>
+<% end %>
 
 <p><%= @track_items %></p>

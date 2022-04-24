@@ -24,6 +24,8 @@ RSpec.describe User, type: :model do
     end
   end
 
+  # Add one for refresh
+
   describe '#access_token_valid?' do
     context 'access token has not expired and is valid ' do
       it 'returns true' do

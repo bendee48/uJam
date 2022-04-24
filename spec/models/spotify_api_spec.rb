@@ -8,6 +8,8 @@ RSpec.describe SpotifyApi, type: :model do
 
   describe '.authorize' do
     it 'returns a successful response object' do
+      stub_const("#{spotify_api}::CLIENT_ID", '12345')
+      
       stub_request(:get, spotify_api::AUTHORIZE_URL)
         .with(query: { client_id: spotify_api::CLIENT_ID,
                        response_type: 'code',
