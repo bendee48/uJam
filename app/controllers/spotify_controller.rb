@@ -15,7 +15,8 @@ class SpotifyController < ApplicationController
     auth_code = params[:code]
     returned_state = params[:state]
 
-    if returned_state == session[:state_code]
+    # Check state code matches and that an auth code has been returned
+    if returned_state == session[:state_code] && params[:code]
       response = SpotifyApi.request_token(auth_code)
       access_token = JSON.parse(response.body)['access_token']
       refresh_token = JSON.parse(response.body)['refresh_token']
@@ -25,7 +26,7 @@ class SpotifyController < ApplicationController
       
       flash.notice = 'Successfully authorised.'
     else
-      flash.alert = 'Suspicious activity detected. Authorisation terminated.'
+      flash.alert = 'Sorry, something went wrong. Authorisation terminated.'
     end
 
     redirect_to root_path
