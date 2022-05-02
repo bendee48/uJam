@@ -6,19 +6,12 @@ RSpec.describe SpotifyApi, type: :model do
   subject(:spotify_api) { described_class }
   let(:user) { create(:user) }
 
-  describe '.authorize' do
+  describe '.authorize', :api_request_helper do
     it 'returns a successful response object' do
-      stub_const("#{spotify_api}::CLIENT_ID", '12345')
-      
-      stub_request(:get, spotify_api::AUTHORIZE_URL)
-        .with(query: { client_id: spotify_api::CLIENT_ID,
-                       response_type: 'code',
-                       scope: 'user-read-recently-played',
-                       redirect_uri: spotify_api::REDIRECT_URL,
-                       state: 'state code' })
-        .to_return({})
+      state_code = '5tat3c0d3'
+      stubbed_authorise(state_code) # API request helper method
 
-      response = spotify_api.authorize('state code')
+      response = spotify_api.authorize(state_code)
       expect(response).to be_a(Faraday::Response)
       expect(response.status).to eql 200
     end

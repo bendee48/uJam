@@ -2,8 +2,9 @@ require 'rails_helper'
 
 RSpec.feature 'Authentication', type: :feature do
   let(:user) { create(:user, :unauthorised) }
+  let(:state_code) { '5tat3c0d3' }
 
-  describe 'authorising Spotify' do
+  describe 'authorising Spotify', :api_request_helper do
     context 'user is initially not authorised' do
       it 'returns no access token' do
         sign_in user
@@ -34,21 +35,13 @@ RSpec.feature 'Authentication', type: :feature do
       it 'authorises user with a valid Spotify account', driver: :mechanize do
         sign_in user
         visit root_path
-        client_id = 'c13nt'
         auth_code = 'au0th'
         access_token = 'ac355'
         refresh_token = 'r3f3sh'
-
+        
         # Stub Authorize
-        allow(SpotifyApi).to receive(:state_code).and_return('state code')
-        stub_const("#{SpotifyApi}::CLIENT_ID", client_id)
-        stub_request(:get, SpotifyApi::AUTHORIZE_URL)
-          .with(query: { client_id: SpotifyApi::CLIENT_ID,
-                        response_type: 'code',
-                        scope: 'user-read-recently-played',
-                        redirect_uri: SpotifyApi::REDIRECT_URL,
-                        state: 'state code' })
-          .to_return({ headers: {location: callback_path + "?code=#{auth_code}" + "&state=state%20code"} })
+        response = { headers: {location: callback_path + "?code=#{auth_code}" + "&state=#{state_code}"}}
+        stubbed_authorise(state_code, response)
 
         # Stub Token Request
         allow(SpotifyApi).to receive(:encoded_credentials).and_return('credentials')
@@ -73,18 +66,9 @@ RSpec.feature 'Authentication', type: :feature do
         sign_in user
         visit root_path
 
-        client_id = 'c13nt'
-
-        # Stub Authorize
-        allow(SpotifyApi).to receive(:state_code).and_return('state code')
-        stub_const("#{SpotifyApi}::CLIENT_ID", client_id)
-        stub_request(:get, SpotifyApi::AUTHORIZE_URL)
-          .with(query: { client_id: SpotifyApi::CLIENT_ID,
-                        response_type: 'code',
-                        scope: 'user-read-recently-played',
-                        redirect_uri: SpotifyApi::REDIRECT_URL,
-                        state: 'state code' })
-          .to_return({ headers: {location: callback_path + "?error=access_denied" + "&state=state%20code"} })
+        # Stub authorise
+        response = { headers: { location: callback_path + "?error=access_denied" + "&state=#{state_code}"}}
+        stubbed_authorise(state_code, response)
 
         click_link('Authorize Spotify')
         user.reload # Relaod user to show saved changes from db
