@@ -44,14 +44,9 @@ RSpec.feature 'Authentication', type: :feature do
         stubbed_authorise(state_code, response)
 
         # Stub Token Request
-        allow(SpotifyApi).to receive(:encoded_credentials).and_return('credentials')
-        stub_request(:post, SpotifyApi::TOKEN_URL)
-          .with(body: { grant_type: 'authorization_code',
-                        code: auth_code,
-                        redirect_uri: SpotifyApi::REDIRECT_URL },
-                headers: { authorization: "Basic #{SpotifyApi.encoded_credentials}" })
-          .to_return({ body: {access_token: access_token, refresh_token: refresh_token, expires_in: 20}.to_json })
-
+        response = { body: {access_token: access_token, refresh_token: refresh_token, expires_in: 20}.to_json }
+        stubbed_request_token(auth_code, response)
+        
         click_link('Authorize Spotify')
         user.reload # Relaod user to show saved changes from db
 

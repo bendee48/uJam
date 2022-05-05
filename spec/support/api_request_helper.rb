@@ -12,4 +12,15 @@ module ApiRequestHelper
                      state: state_code })
       .to_return(return_response)
   end
+
+  def stubbed_request_token(auth_code, return_response={})
+    allow(SpotifyApi).to receive(:encoded_credentials).and_return('credentials')
+
+    stub_request(:post, SpotifyApi::TOKEN_URL)
+      .with(body: { grant_type: 'authorization_code',
+                    code: auth_code,
+                    redirect_uri: SpotifyApi::REDIRECT_URL },
+            headers: { authorization: "Basic #{SpotifyApi.encoded_credentials}" })
+      .to_return(return_response)
+  end
 end
