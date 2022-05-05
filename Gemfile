@@ -73,10 +73,10 @@ group :development, :test do
   gem 'webmock', '~> 3.14'
   # gem 'capybara', '~> 3.36'
   # gem 'capybara-mechanize'
+  gem 'byebug'
   gem 'capybara', '~> 2.7'
   gem 'capybara-mechanize', '~> 1.11' # For external requests
   gem 'selenium-webdriver'
-  gem 'byebug'
 end
 
 group :development do

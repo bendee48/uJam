@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module ApiRequestHelper
-  def stubbed_authorise(state_code, return_response={})
+  def stubbed_authorise(state_code, return_response = {})
     client_id = 'cl13nt'
     allow(SpotifyApi).to receive(:state_code).and_return(state_code)
     stub_const("#{SpotifyApi}::CLIENT_ID", client_id)
@@ -13,7 +15,7 @@ module ApiRequestHelper
       .to_return(return_response)
   end
 
-  def stubbed_request_token(auth_code, return_response={})
+  def stubbed_request_token(auth_code, return_response = {})
     allow(SpotifyApi).to receive(:encoded_credentials).and_return('credentials')
 
     stub_request(:post, SpotifyApi::TOKEN_URL)

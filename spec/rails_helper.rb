@@ -98,5 +98,3 @@ RSpec.configure do |config|
 end
 
 WebMock.disable_net_connect!
-
-
