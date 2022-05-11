@@ -9,6 +9,8 @@
 # All cops
 AllCops:
   SuggestExtensions: false
+  Exclude:
+    - 'db/**/*'
 
 Lint/AmbiguousBlockAssociation: 
   Exclude: 
