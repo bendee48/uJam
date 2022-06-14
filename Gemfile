@@ -54,6 +54,8 @@ gem 'bootsnap', require: false
 gem 'devise'
 # HTTP requests
 gem 'faraday', '~> 2.2'
+# CSS
+gem 'bootstrap', '~> 5.1.3'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -68,15 +70,13 @@ group :development, :test do
   gem 'rubocop', '~> 1.25', '>= 1.25.1'
   gem 'rubocop-rails', '~> 2.13', '>= 2.13.2'
   # Testing tools
-  gem 'database_cleaner-active_record'
-  gem 'factory_bot_rails', '~> 6.2'
-  gem 'webmock', '~> 3.14'
-  # gem 'capybara', '~> 3.36'
-  # gem 'capybara-mechanize'
   gem 'byebug'
   gem 'capybara', '~> 2.7'
   gem 'capybara-mechanize', '~> 1.11' # For external requests
+  gem 'database_cleaner-active_record'
+  gem 'factory_bot_rails', '~> 6.2'
   gem 'selenium-webdriver'
+  gem 'webmock', '~> 3.14'
 end
 
 group :development do

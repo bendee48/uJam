@@ -14,10 +14,6 @@ class SpotifyController < ApplicationController
   end
 
   def callback
-    # take authorization code from intial authorization request from #authorize
-    # auth_code = params[:code]
-    # returned_state = params[:state]
-
     # Check state code matches and that an auth code has been returned
     if @returned_state_code == session[:state_code] && params[:code]
       response = SpotifyApi.request_token(@auth_code)
