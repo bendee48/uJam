@@ -1,6 +1,11 @@
-<h1>Static#homepage</h1>
-<p>Find me in app/views/static/homepage.html.erb</p>
-<small>Access valid?: <%= current_user.access_token_valid? %></small>
+<!--Testing-->
+<p style="font-size:10px">User is authenticated?: <%= current_user.authenticated? %></p>
+<p style="font-size:10px">Access token is valid?: <%= current_user.access_token_valid? %></p>
 <% unless current_user.authenticated? %>
-  <button><%= link_to 'Authorize Spotify', authorize_path, class: 'authorize-btn' %></button>
+  <h1 class="text-center">Authorize your Spotify account to get started.</h1>
+  <div class="row justify-content-center">
+    <div class="col-sm-4">
+        <%= link_to 'Authorize Spotify', authorize_path, class: 'authorize-btn btn btn-primary btn-lg w-100' %>
+    </div>
+  </div>
 <% end %>
