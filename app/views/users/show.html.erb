@@ -1,7 +1,28 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<!--Testing-->
+<p style="font-size:10px">User is authenticated?: <%= current_user.authenticated? %></p>
+<p style="font-size:10px">Access token is valid?: <%= current_user.access_token_valid? %></p>
 <% unless current_user.authenticated? %>
-  <button><%= link_to 'Authorize Spotify', authorize_path, class: 'authorize-btn' %></button>
+  <%= render 'shared/authorize_button' %>
 <% end %>
 
-<p><%= @track_items %></p>
+<% if @track_items %>
+  <% @track_items.each do |track_item| %>
+    <div class="row justify-content-center">
+      <div class="col-md-7">
+        <div class="card border-success text-center mb-3">
+          <div class="card-body text-success d-flex flex-column flex-md-row justify-content-around align-items-center">
+            <div class="track-names flex-grow-1 border-sm">
+              <h5 class="card-title"><%= track_item.name %></h5>
+              <p class="card-text mb-3 mb-md-0"><%= track_item.artist %></p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small><%= time_ago_in_words(track_item.played_at) %> ago</small>
+            <%= link_to 'Go to Album', track_item.album_link, class: 'btn btn-sm btn-outline-success', target: '_blank' %>
+            <%= link_to 'Preview Track', track_item.preview_link, class: 'btn btn-sm btn-outline-success', target: '_blank' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

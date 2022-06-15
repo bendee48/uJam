@@ -13,7 +13,7 @@
   <body>
     <main class='container-md'>
       <%= render 'layouts/nav' if user_signed_in? %>
-      <%= render 'layouts/alert' %>
+      <%= render 'layouts/alert' if flash.any? %>
       <%= yield %>
     </main>
   </body>
